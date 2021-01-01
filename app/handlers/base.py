@@ -4,6 +4,7 @@ from aiogram.types import ContentType
 
 from ..loader import dp
 from ..keyboards.inline import start_kb
+from ..models import User
 from ..utils.search import search
 
 
@@ -17,4 +18,4 @@ async def bot_start(message: types.Message):
 async def search(message: types.Message, user: User):
     if message.text >= 1228:
         return message.answer("Ваш Запрос Привысил Огранечение в 1227 букв. И он отклоняется")
-
+    pass  # here search query
