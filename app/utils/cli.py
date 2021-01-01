@@ -5,6 +5,7 @@ from loguru import logger
 import aiohttp_autoreload
 
 from .misc import on_startup, on_shutdown
+from ..config import WEBHOOK_URL
 
 
 @click.group()
@@ -34,8 +35,16 @@ def auto_reload_mixin(func):
 
 @cli.command()
 @auto_reload_mixin
-def start_bot():
+def polling():
     from aiogram import executor
     from ..handlers import dp
 
     executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
+
+@cli.command()
+@auto_reload_mixin
+def webhook():
+    from aiogram import executor
+    from ..handlers import dp
+
+    executor.start_webhook(dp, webhook_path=WEBHOOK_URL, on_startup=on_startup, on_shutdown=on_shutdown)
