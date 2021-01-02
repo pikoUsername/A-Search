@@ -11,17 +11,6 @@ db = Gino()
 class BaseModel(db.Model):
     __abstaract__ = True
 
-    @classmethod
-    def __tablename__(cls):
-        if getattr(cls, "__tablename__", None) is not None:
-            return cls.__tablename__
-
-        name = cls.__name__.lower()
-        if getattr(cls, "__abstract__", None) is None:
-            return name
-        return None
-    __tablename__ = __tablename__()
-
     def __str__(self):
         model = self.__class__.__name__
         table: sa.Table = sa.inspect(self.__class__)

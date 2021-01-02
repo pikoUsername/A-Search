@@ -1,5 +1,6 @@
 # very important info here
 .env
+app/.env
 # pycharm's trash
 /.idea
 .idea/*

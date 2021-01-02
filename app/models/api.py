@@ -10,7 +10,7 @@ from .. import config
 class DBCommands:
     @staticmethod
     async def get_user_by_id(tg_id: int):
-        user = await User.query.where(User.uid == tg_id).gino.first()
+        user = await User.query.where(User.user_id == tg_id).gino.first()
         return user
 
     @staticmethod

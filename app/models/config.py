@@ -4,6 +4,8 @@ from .base import db, TimedBaseModel
 
 
 class Config(TimedBaseModel):
+    __tablename__ = "config"
+
     query: sql.Select
 
     id = db.Column(db.Integer, index=True, primary_key=True)

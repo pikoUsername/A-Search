@@ -17,6 +17,8 @@ def get_env(key: str, default: Union[str, int] = None, type_: str = "str") -> An
         elif type_ == "tuple":
             result: tuple = (os.getenv(key, default),)
             return result
+        elif type_ == "boolean":
+            return os.getenv(key, default)
         else:
             raise TypeError("Type Not Allowed")
     return str(os.getenv(key, default))
@@ -37,11 +39,5 @@ POSTGRES_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASS}@{POSTGRES_HOST}:{P
 
 TOKEN = get_env("BOT_TOKEN", None)
 ADMIN_IDS = get_env("ADMIN_IDS", None, "tuple")
-
-REDIS_ON = get_env("REDIS_ON", None)
-
-REDIS_HOST = get_env("REDIS_HOST", default="localhost")
-REDIS_PORT = get_env("REDIS_PORT", default=6379)
-REDIS_DB_FSM = get_env("REDIS_DB_FSM", default=0)
 
 LOGS_BASE_PATH = str(Path(__name__).parent.parent / "logs")

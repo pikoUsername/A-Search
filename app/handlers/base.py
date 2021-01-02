@@ -5,17 +5,19 @@ from aiogram.types import ContentType
 from ..loader import dp
 from ..keyboards.inline import start_kb
 from ..models import User
+from ..state import start
 from ..utils.search import search
 
 
-@dp.message_handler(CommandStart())
+@dp.message_handler(commands=["start", "help"])
 async def bot_start(message: types.Message):
+    await start.MainMenuState.main_menu.set()
     return await message.answer("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот Имеет кастомизацию запросов типичную...\n",
                                 reply_markup=start_kb)
 
 
 @dp.message_handler(content_types=ContentType.TEXT)
 async def search(message: types.Message, user: User):
-    if message.text >= 1228:
+    if len(message.text) >= 1228:
         return message.answer("Ваш Запрос Привысил Огранечение в 1227 букв. И он отклоняется")
     pass  # here search query

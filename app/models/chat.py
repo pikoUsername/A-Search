@@ -4,6 +4,8 @@ from .base import TimedBaseModel, db
 
 
 class Chat(TimedBaseModel):
+    __tablename__ = "chats"
+
     query: sql.Select
 
     id = db.Column(db.Integer, index=True, primary_key=True)

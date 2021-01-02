@@ -5,7 +5,7 @@ from ..config import POSTGRES_URI
 
 
 async def on_startup(dp):
-    await db.gino.set_bind(POSTGRES_URI)
+    await db.set_bind(POSTGRES_URI)
 
     await db.gino.create_all()
 
@@ -14,4 +14,5 @@ async def on_shutdown(dp):
     bind = db.pop_bind()
     if bind:
         logger.info("Closing Postgres Connection")
+        await db.gino.drop_all(bind=bind)
         await bind.close()
