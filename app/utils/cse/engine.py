@@ -1,2 +1,2 @@
 import aiohttp
-# todo make Yandex, Google search
+# todo make Google search

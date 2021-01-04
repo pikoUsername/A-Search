@@ -14,4 +14,4 @@ class User(TimedBaseModel):
     last_name = db.Column(db.String(128))
     search_language_type = db.Column(db.String(20))
     is_admin = db.Column(db.Boolean, default=sa.sql.expression.false())
-    config = db.ForeignKey('Config', ondelete="CASCADE")
+    config = db.ForeignKey('config', ondelete="CASCADE")

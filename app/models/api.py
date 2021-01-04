@@ -1,10 +1,14 @@
+from typing import List, Dict
+
 from aiogram import types
+from cse import SearchResult, SearchError, Language
+from loguru import logger
 
 from .user import User
 from .chat import Chat
-from .config import Config
-
 from .. import config
+from ..loader import search
+from ..utils.lang import get_user_lang
 
 
 class DBCommands:
@@ -42,3 +46,20 @@ class DBCommands:
         new_chat.type = chat.type
 
         await new_chat.create()
+
+    async def search_query(self, user: User, text: str, max_results: int=10) -> str:
+        if len(text) <= 5:
+            logger.error("Text less than 5 letters")
+            raise TypeError("Text less than 5 letters")
+        user_lang = await get_user_lang(user)
+        try:
+            results = await search.search(
+                query=text,
+                max_results=max_results,
+                language=user_lang
+            )
+        except SearchError as e:
+            logger.error(str(e))
+            raise e
+
+        return "\n".join([f"<a href='{i.link}'>{i.title.replace(f'{text} ')}</a>" for i in results])

@@ -30,6 +30,8 @@ WEBHOOK_BASE_PATH = get_env("WEBHOOK_BASE_PATH", default="/webhook")
 WEBHOOK_PATH = f"{WEBHOOK_BASE_PATH}/{SECRET_KEY}"
 WEBHOOK_URL = f"https://{DOMAIN}{WEBHOOK_PATH}"
 
+GOOGLE_API_KEY = get_env("GOOGLE_API_KEY", None)
+
 POSTGRES_NAME = get_env("DB_NAME", None)
 POSTGRES_HOST = get_env("DB_HOST", None)
 POSTGRES_PORT = get_env("DB_PORT", type_="int")

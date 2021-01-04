@@ -1,11 +1,11 @@
 from aiogram import types
 from aiogram.types import ContentType
+from loguru import logger
 
 from ..loader import dp, bot
 from ..keyboards.inline import start_kb
-from ..models import User
+from ..models import dbc
 from ..state import start
-from ..utils.search import search
 
 
 @dp.message_handler(commands=["start", "help"])
@@ -16,11 +16,22 @@ async def bot_start(message: types.Message):
 
 
 @dp.message_handler(content_types=ContentType.TEXT)
-async def search(message: types.Message, user: User):
+async def bot_search(message: types.Message):
     if len(message.text) >= 1228:
-        return message.answer("Ваш Запрос Привысил Огранечение в 1227 букв. И он отклоняется")
-    pass  # here search query
+        return await message.answer("Ваш Запрос Привысил Огранечение в 1227 букв. И он отклоняется")
+    user = dbc.get_user_by_id(message.from_user.id)
+    try:
+        result = await dbc.search_query(user, message.text)
+    except ValueError:
+        result = None
+    except TypeError as e:
+        logger.error(e)
+        raise e
+        # return await message.reply("Сообщение Должно Быть больше 5 символов")
 
+    if not result:
+        return await message.reply("Ошибка, Нечего Не было Показано")
+    return await message.answer(result)
 
 @dp.callback_query_handler(text="start_menu_help", state=start.MainMenuState.main_menu)
 async def get_help_menu(query: types.CallbackQuery):
