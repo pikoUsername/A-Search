@@ -4,3 +4,4 @@ class MainMenuState(StatesGroup):
     main_menu =   State()
     config_menu = State()
     meta_menu =   State()
+    help_menu =   State()

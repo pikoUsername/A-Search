@@ -4,7 +4,7 @@ from .base import db, TimedBaseModel
 
 
 class User(TimedBaseModel):
-    __tablename__ = "users32"
+    __tablename__ = "users5"
 
     query: sa.sql.Select
 

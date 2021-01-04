@@ -7,7 +7,7 @@ config_btns = [
         InlineKeyboardButton(text="Выбрать Регион", callback_data="choice_region"),
     ],
     [
-        InlineKeyboardButton(text="<< Назад", callback_data="config_back"),
+        InlineKeyboardButton(text="<< Назад", callback_data="back_to_main_menu"),
     ]
 ]
 

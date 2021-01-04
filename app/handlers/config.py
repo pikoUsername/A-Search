@@ -20,9 +20,3 @@ async def choice_search_system(query: types.CallbackQuery):
 async def change_search_system(query: types.CallbackQuery):
      return await query.message.edit_text("Настройки: ", reply_markup=config.config_kb)
 
-
-@dp.callback_query_handler(text="config_back", state=start.MainMenuState.config_menu)
-async def get_main_menu(query: types.CallbackQuery):
-    await start.MainMenuState.main_menu.set()
-    return await query.message.edit_text("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот Имеет кастомизацию запросов типичную...\n",
-                                         reply_markup=start_kb)
