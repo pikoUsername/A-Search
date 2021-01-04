@@ -3,7 +3,7 @@ from typing import Optional
 from aiogram import types
 from aiogram.dispatcher.middlewares import BaseMiddleware
 
-from ..models import dbc
+from ..models import dbc, User, Chat
 
 
 class AclMiddleware(BaseMiddleware):
@@ -11,10 +11,10 @@ class AclMiddleware(BaseMiddleware):
         user_id = tg_user.id
         chat_id = tg_chat.id if tg_chat else tg_user.id
 
-        user = await dbc.get_user_by_id(user_id)
+        user = await User.get(user_id)
         if not user:
             user = await dbc.add_new_user(tg_user)
-        chat = await dbc.get_chat_by_id(chat_id)
+        chat = await Chat.get(chat_id)
         if not chat:
             chat = await dbc.add_new_chat(tg_chat)
 

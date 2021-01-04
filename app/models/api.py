@@ -48,9 +48,6 @@ class DBCommands:
         await new_chat.create()
 
     async def search_query(self, user: User, text: str, max_results: int=10) -> str:
-        if len(text) <= 5:
-            logger.error("Text less than 5 letters")
-            raise TypeError("Text less than 5 letters")
         user_lang = await get_user_lang(user)
         try:
             results = await search.search(
@@ -62,4 +59,4 @@ class DBCommands:
             logger.error(str(e))
             raise e
 
-        return "\n".join([f"<a href='{i.link}'>{i.title.replace(f'{text} ')}</a>" for i in results])
+        return "\n".join([f"{i.title} |\n{i.link}" for i in results])

@@ -15,24 +15,6 @@ async def bot_start(message: types.Message):
                                 reply_markup=start_kb)
 
 
-@dp.message_handler(content_types=ContentType.TEXT)
-async def bot_search(message: types.Message):
-    if len(message.text) >= 1228:
-        return await message.answer("Ваш Запрос Привысил Огранечение в 1227 букв. И он отклоняется")
-    user = dbc.get_user_by_id(message.from_user.id)
-    try:
-        result = await dbc.search_query(user, message.text)
-    except ValueError:
-        result = None
-    except TypeError as e:
-        logger.error(e)
-        raise e
-        # return await message.reply("Сообщение Должно Быть больше 5 символов")
-
-    if not result:
-        return await message.reply("Ошибка, Нечего Не было Показано")
-    return await message.answer(result)
-
 @dp.callback_query_handler(text="start_menu_help", state=start.MainMenuState.main_menu)
 async def get_help_menu(query: types.CallbackQuery):
     """
@@ -52,7 +34,7 @@ async def get_help_menu(query: types.CallbackQuery):
         return await query.message.edit_text("Здесь Нету Никаких Комманд", reply_markup=commands_kb)
 
     await query.message.edit_text("Справка По Коммандам\n", reply_markup=commands_kb)
-    return await start.MainMenuState.help_menu.set()
+    await start.MainMenuState.help_menu.set()
 
 
 @dp.callback_query_handler(text="back_to_main_menu", state="*")
@@ -60,3 +42,4 @@ async def get_main_menu(query: types.CallbackQuery):
     await start.MainMenuState.main_menu.set()
     return await query.message.edit_text("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот НЕ РАБОТАЕТ...\n",
                                          reply_markup=start_kb)
+

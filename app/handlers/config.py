@@ -7,8 +7,8 @@ from ..state import start
 
 @dp.callback_query_handler(text="start_menu_settings", state=start.MainMenuState.main_menu)
 async def show_settings_menu(query: types.CallbackQuery):
-    await start.MainMenuState.config_menu.set()
-    return await query.message.edit_text("Настройки:", reply_markup=config.config_kb)
+    await query.message.edit_text("Настройки:", reply_markup=config.config_kb)
+    return await start.MainMenuState.config_menu.set()
 
 
 @dp.callback_query_handler(text="where_search", state=start.MainMenuState.config_menu)
