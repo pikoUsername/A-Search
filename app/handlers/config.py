@@ -1,7 +1,7 @@
 from aiogram import types
 
 from ..loader import dp
-from ..keyboards.inline import config, search, start_kb
+from ..keyboards.inline import config, search
 from ..state import start
 
 

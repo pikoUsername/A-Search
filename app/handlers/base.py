@@ -30,8 +30,6 @@ async def get_help_menu(query: types.CallbackQuery):
     :param query:
     :return:
     """
-
-
     commands = await bot.get_my_commands()
     commands_btns = []
     for command in commands:
@@ -49,5 +47,5 @@ async def get_help_menu(query: types.CallbackQuery):
 @dp.callback_query_handler(text="back_to_main_menu", state="*")
 async def get_main_menu(query: types.CallbackQuery):
     await start.MainMenuState.main_menu.set()
-    return await query.message.edit_text("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот Имеет кастомизацию типичную...\n",
+    return await query.message.edit_text("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот НЕ РАБОТАЕТ...\n",
                                          reply_markup=start_kb)
