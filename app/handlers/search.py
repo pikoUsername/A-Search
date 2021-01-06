@@ -1,6 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ContentType, Message
 from aiogram.dispatcher.handler import ctx_data
+from cse import QuotaExceededError
 
 from ..models import dbc, User
 from ..loader import dp
@@ -22,4 +23,6 @@ async def bot_search(message: Message, state: FSMContext):
         return await message.reply("Ошибка, Нечего Не было Показано")
     except KeyError:
         return await message.answer("Результатов Не найдено((")
+    except QuotaExceededError:
+        return await message.answer("Бот Исчерпал лимит в 100 запросов в день")
     return await message.answer(result, disable_web_page_preview=True)
