@@ -25,5 +25,5 @@ async def get_description(query: types.CallbackQuery):
         [
             types.InlineKeyboardButton("<< Назад", callback_data="back_to_main_menu"),
         ],
-    ],)
+    ])
     return await query.message.edit_text("\n".join(text), reply_markup=kb)

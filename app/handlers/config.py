@@ -16,7 +16,7 @@ async def choice_search_system(query: types.CallbackQuery):
     return await query.message.edit_text("Выбирите:", reply_markup=search.search_choice_kb)
 
 
-@dp.callback_query_handler(text="config_search_google", state=start.MainMenuState.config_menu)
+@dp.callback_query_handler(text_contains="config_search_google", state=start.MainMenuState.config_menu)
 async def change_search_system(query: types.CallbackQuery):
      return await query.message.edit_text("Настройки: ", reply_markup=config.config_kb)
 

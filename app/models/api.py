@@ -53,10 +53,10 @@ class DBCommands:
             results = await search.search(
                 query=text,
                 max_results=max_results,
-                language=user_lang
+                language=user_lang,
             )
         except SearchError as e:
             logger.error(str(e))
             raise e
 
-        return "\n".join([f"{i.title} |\n{i.link}" for i in results])
+        return "\n".join([f"{i.title}: \n{i.link}" for i in results])
