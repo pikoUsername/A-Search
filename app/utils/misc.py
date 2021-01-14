@@ -5,9 +5,9 @@ from ..config import POSTGRES_URI
 
 
 async def on_startup(dp):
-    await db.set_bind(POSTGRES_URI)
+    bind = await db.set_bind(POSTGRES_URI)
 
-    await db.gino.create_all()
+    await db.gino.create_all(bind=bind)
 
 
 async def on_shutdown(dp):

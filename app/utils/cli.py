@@ -57,4 +57,9 @@ def webhook():
     from aiogram import executor
     from app.handlers import dp
 
-    executor.start_webhook(dp, webhook_path=WEBHOOK_URL, on_startup=on_startup, on_shutdown=on_shutdown)
+    executor.start_webhook(
+        dp,
+        webhook_path=WEBHOOK_URL,
+        on_startup=on_startup,
+        on_shutdown=on_shutdown
+    )

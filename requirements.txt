@@ -7,3 +7,4 @@ python-dotenv
 click==7.1.1
 aiohttp_autoreload==0.0.1
 git+https://github.com/XuaTheGrate/python-cse
+flake8

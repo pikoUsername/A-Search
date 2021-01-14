@@ -1,6 +1,7 @@
 from typing import List
 
 from aiogram import types
+from aiogram.dispatcher.webhook import EditMessageText
 
 from ..loader import dp, bot
 from ..state.start import MainMenuState
@@ -26,4 +27,4 @@ async def get_description(query: types.CallbackQuery):
             types.InlineKeyboardButton("<< Назад", callback_data="back_to_main_menu"),
         ],
     ])
-    return await query.message.edit_text("\n".join(text), reply_markup=kb)
+    return EditMessageText("\n".join(text), reply_markup=kb)

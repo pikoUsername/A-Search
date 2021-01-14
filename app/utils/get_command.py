@@ -7,5 +7,3 @@ async def find_command_by_name(name: str):
         if command.command == name:
             return command
     raise AttributeError("Command Not Found")
-
-

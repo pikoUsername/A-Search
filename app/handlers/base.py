@@ -1,18 +1,19 @@
 from aiogram import types
-from aiogram.types import ContentType
-from loguru import logger
+from aiogram.dispatcher.webhook import SendMessage, EditMessageText
 
 from ..loader import dp, bot
 from ..keyboards.inline import start_kb
-from ..models import dbc
 from ..state import start
 
 
 @dp.message_handler(commands=["start", "help"])
 async def bot_start(message: types.Message):
     await start.MainMenuState.main_menu.set()
-    return await message.answer("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот Имеет кастомизацию запросов типичную...\n",
-                                reply_markup=start_kb)
+    return SendMessage(
+        message.message_id,
+        "Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот Имеет кастомизацию запросов типичную...\n",
+        reply_markup=start_kb
+    )
 
 
 @dp.callback_query_handler(text="start_menu_help", state=start.MainMenuState.main_menu)
@@ -40,6 +41,10 @@ async def get_help_menu(query: types.CallbackQuery):
 @dp.callback_query_handler(text="back_to_main_menu", state="*")
 async def get_main_menu(query: types.CallbackQuery):
     await start.MainMenuState.main_menu.set()
-    return await query.message.edit_text("Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот НЕ РАБОТАЕТ...\n",
-                                         reply_markup=start_kb)
+    return EditMessageText(
+        "Этот Бот Создан для Поиска В Поисковых Системах.\n И этот Бот НЕ РАБОТАЕТ...\n",
+        query.message.chat.id,
+        reply_markup=start_kb,
+        message_id=query.message.message_id,
+    )
 

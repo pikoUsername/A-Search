@@ -1,5 +1,3 @@
-from typing import List, Dict
-
 from aiogram import types
 from cse import SearchResult, SearchError, Language
 from loguru import logger
@@ -47,7 +45,7 @@ class DBCommands:
 
         await new_chat.create()
 
-    async def search_query(self, user: User, text: str, max_results: int=10) -> str:
+    async def search_query(self, user: User, text: str, max_results: int = 10) -> str:
         user_lang = await get_user_lang(user)
         try:
             results = await search.search(
