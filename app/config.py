@@ -26,9 +26,9 @@ def get_env(key: str, default: Union[str, int] = None, type_: str = "str") -> An
 
 DOMAIN = get_env("DOMAIN", default="example.com")
 SECRET_KEY = secrets.token_urlsafe(48)
-WEBHOOK_BASE_PATH = get_env("WEBHOOK_BASE_PATH", default="/webhook")
+WEBHOOK_BASE_PATH = get_env("WEBHOOK_BASE_PATH", default="/")
 WEBHOOK_PATH = f"{WEBHOOK_BASE_PATH}/{SECRET_KEY}"
-WEBHOOK_URL = f"https://{DOMAIN}{WEBHOOK_PATH}"
+WEBHOOK_URL = f"https://{DOMAIN}/{WEBHOOK_PATH}"
 
 GOOGLE_API_KEY = get_env("GOOGLE_API_KEY", None)
 
