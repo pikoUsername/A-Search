@@ -35,7 +35,6 @@ def auto_reload_mixin(func):
     return wrapper
 
 
-
 @cli.command(name="polling")
 @click.option("--skip-updates", is_flag=True, default=False, help="Skip pending updates")
 @auto_reload_mixin

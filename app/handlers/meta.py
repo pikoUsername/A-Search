@@ -3,7 +3,7 @@ from typing import List
 from aiogram import types
 from aiogram.dispatcher.webhook import EditMessageText
 
-from ..loader import dp, bot
+from ..loader import dp
 from ..state.start import MainMenuState
 from ..keyboards.inline.meta import meta_kb
 

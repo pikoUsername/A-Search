@@ -47,4 +47,3 @@ async def get_main_menu(query: types.CallbackQuery):
         reply_markup=start_kb,
         message_id=query.message.message_id,
     )
-

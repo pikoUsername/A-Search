@@ -4,12 +4,14 @@ from typing import List
 import sqlalchemy as sa
 
 from gino import Gino
+from sqlalchemy import sql
 
 db = Gino()
 
 
 class BaseModel(db.Model):
     __abstaract__ = True
+    query: sql.Select
 
     def __str__(self):
         model = self.__class__.__name__
